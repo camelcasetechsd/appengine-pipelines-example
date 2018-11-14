@@ -1,0 +1,11 @@
+<html>
+  <body>
+    <h1>Yaml Example</h1>
+    <p>Cities:</p>
+    <ul>
+        {% for city in data.cities %}
+        <li><i>{{ city.name }}</i> ({{ city.lat }}, {{ city.lon }})</li>
+        {% endfor %}
+    </ul>
+  </body>
+</html>
