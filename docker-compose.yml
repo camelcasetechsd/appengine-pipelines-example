@@ -1,0 +1,18 @@
+version: '3'
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    working_dir: /src
+    command: /src/docker.sh
+    environment:
+      - GAE_DIR=/google-cloud-sdk/platform/google_appengine
+      - DATASTORE_PATH=/datastore/datastore.db
+    volumes:
+      - .:/src
+      - ./.datastore:/datastore
+    ports:
+      - "9000:9000"
+      - "9080:9080"

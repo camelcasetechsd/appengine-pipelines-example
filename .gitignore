@@ -1,0 +1,10 @@
+# Google App Engine files in Docker
+.datastore/*
+!.datastore/.gitkeep
+
+# External libs
+libs/*
+!libs/.gitkeep
+
+# Byte-compiled / optimized / Python files
+*.pyc

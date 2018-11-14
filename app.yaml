@@ -1,0 +1,18 @@
+service: default
+version: 1 # required for compatiblity with pipeline library
+
+runtime: python27
+api_version: 1
+threadsafe: false
+
+# default module uses autoscaling
+instance_class: F1
+
+handlers:
+- url: /_ah/pipeline(/.*)?
+  login: admin
+  script: main.pipeline_app
+
+- url: /.*
+  script: main.app
+  login: admin
