@@ -1,3 +1,6 @@
+# Environment vars
+env.yaml
+
 # Google App Engine files in Docker
 .datastore/*
 !.datastore/.gitkeep

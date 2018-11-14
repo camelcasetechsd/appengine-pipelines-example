@@ -16,3 +16,6 @@ handlers:
 - url: /.*
   script: main.app
   login: admin
+
+includes:
+  - ./env.yaml

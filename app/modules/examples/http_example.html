@@ -1,0 +1,14 @@
+<html>
+  <body>
+    <h1>HTTP Example</h1>
+    {% if has_api_key %}
+    <p>Latitude: {{ lat }}</p>
+    <p>Longitude: {{ lon }}</p>
+    <p>City: {{ city }}</p>
+    <p>Temperature: {{ temp }}</p>
+    <p>Weather: {{ weather }}</p>
+    {% else %}
+    <p>You must obtain a <a href="https://openweathermap.org/appid" target="_blank">OpenWeatherMap API key</a> and place it in <i>env.yaml</i> before running this!</p>
+    {% endif %}
+  </body>
+</html>
