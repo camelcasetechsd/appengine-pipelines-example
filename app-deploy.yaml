@@ -1,0 +1,21 @@
+service: default
+#version: 1 # must not be set for gcloud deploys
+
+runtime: python27
+api_version: 1
+threadsafe: false
+
+# default module uses autoscaling
+instance_class: F1
+
+handlers:
+- url: /_ah/pipeline(/.*)?
+  login: admin
+  script: main.pipeline_app
+
+- url: /.*
+  script: main.app
+  login: admin
+
+includes:
+  - ./env.yaml

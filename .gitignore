@@ -1,4 +1,5 @@
 # Environment vars
+.env
 env.yaml
 
 # Google App Engine files in Docker

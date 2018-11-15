@@ -10,6 +10,7 @@ services:
     environment:
       - GAE_DIR=/google-cloud-sdk/platform/google_appengine
       - DATASTORE_PATH=/datastore/datastore.db
+      - APPENGINE_PROJECT_ID=$APPENGINE_PROJECT_ID
     volumes:
       - .:/src
       - ./.datastore:/datastore
