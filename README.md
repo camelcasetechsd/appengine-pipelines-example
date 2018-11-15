@@ -50,3 +50,18 @@ Packages are available for common Linux distributions.
 * **Google Cloud SDK - App Engine (Python) Component**  
 https://cloud.google.com/appengine/docs/standard/python/download#python_linux  
 The Standard Python App Engine component is required, both to run the local dev server and to deploy.
+
+
+## Deployment
+
+To deploy this project, a Google AppEngine project must be created. A (free) project may be created here:
+https://console.cloud.google.com/appengine
+
+Once you have a `PROJECT_ID` you must place it inside a new `.env` file (please check `.env.dist` to see the expected file structure).
+
+The project may be deployed to AppEngine using the `deploy.sh` script:
+```
+docker-compose exec app ./deploy.sh
+```
+
+The command above may be used both for the initial deploy and subsequent deploys to update the running codebase.
