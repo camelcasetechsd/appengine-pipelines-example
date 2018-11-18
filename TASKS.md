@@ -38,3 +38,17 @@ coordinates. Add basic error handling and output "No pages found" if the
 Wikipedia API returns no results.
 
 No API key is required for the Wikipedia API.
+
+
+3. **datastore_training**
+Using `app/modules/examples/datastore_example.py` as your example, create a new
+`app/modules/training/datastore_training.py` file, with a handler accessible
+at `/training/datastore`.
+
+In your training Datastore page, implement a listing of all `entities` existing
+for the *Example* `kind`. See more info:
+https://cloud.google.com/appengine/docs/standard/python/ndb/
+
+For the output, simply create a `<dl>` element with a `<dt>`  containing each
+entity *key* and a `<dd>` containing each entity *value*:
+https://www.w3schools.com/tags/tag_dl.asp
