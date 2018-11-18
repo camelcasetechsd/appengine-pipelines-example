@@ -16,3 +16,39 @@ https://sookocheff.com/post/appengine/pipelines/connecting-pipelines/
 
 This training shows how to implement connecting pipelines using the special
 `yield` keyword.
+
+
+2. **http_training**
+Using `app/modules/examples/http_example.py` as your example, create a new
+`app/modules/training/http_training.py` file, with a handler accessible
+at `/training/http`.
+
+In your training HTTP client, implement the `Wikipedia API` to find the
+Wikipedia page(s) for particular locations. Like the `http_example`, accept
+lat/lon coordinates as inputs from the URL. Then pass them into the call to
+this API endpoint (where the `40` and `20` in `ggscoord=40%7C20` are replaced
+with the `lat` and `lon` values):
+https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=1&explaintext=1&exlimit=20&generator=geosearch&ggscoord=40%7C20&ggsradius=10000&ggslimit=100
+
+Using the JSON provided in the result, print the `title` and `extract` property
+from the first item in the `query` array.
+
+Please note - not all lat/lon values will have Wikipedia pages matching their
+coordinates. Add basic error handling and output "No pages found" if the
+Wikipedia API returns no results.
+
+No API key is required for the Wikipedia API.
+
+
+3. **datastore_training**
+Using `app/modules/examples/datastore_example.py` as your example, create a new
+`app/modules/training/datastore_training.py` file, with a handler accessible
+at `/training/datastore`.
+
+In your training Datastore page, implement a listing of all `entities` existing
+for the *Example* `kind`. See more info:
+https://cloud.google.com/appengine/docs/standard/python/ndb/
+
+For the output, simply create a `<dl>` element with a `<dt>`  containing each
+entity *key* and a `<dd>` containing each entity *value*:
+https://www.w3schools.com/tags/tag_dl.asp
