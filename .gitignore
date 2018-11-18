@@ -1,6 +1,7 @@
 # Environment vars
 .env
 env.yaml
+.vscode
 
 # Google App Engine files in Docker
 .datastore/*
