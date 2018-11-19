@@ -9,7 +9,7 @@ class HomeHandler(webapp2.RequestHandler):
     def get(self):
         logging.info("HomeHandler get()")
 
-        # get logiged in user
+        # get logged in user
         user = users.get_current_user()
 
         template_path = os.path.join(os.path.dirname(__file__), 'home.html')

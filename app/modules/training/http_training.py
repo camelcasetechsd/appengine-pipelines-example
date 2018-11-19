@@ -5,7 +5,7 @@ import requests
 from google.appengine.ext.webapp import template
 from requests_toolbelt.adapters import appengine
 
-
+# https://toolbelt.readthedocs.io/en/latest/adapters.html#appengineadapter
 appengine.monkeypatch(validate_certificate=False)
 
 class HttpTrainingHandler(webapp2.RequestHandler):
