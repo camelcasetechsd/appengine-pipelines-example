@@ -13,7 +13,7 @@ class HttpTrainingHandler(webapp2.RequestHandler):
         logging.info("HttpTrainingHandler get(%s,%s)" % (lat, lon))
 
         # wikipedia base api url
-        API_HOST = "http://en.wikipedia.org/w/api.php?"
+        API_HOST = "https://en.wikipedia.org/w/api.php?"
             
         # add given lat long to api url
         apiUrl = "%sformat=json&action=query&prop=extracts&exintro=1&explaintext=1&exlimit=20&generator=geosearch&ggsradius=10000&ggslimit=100&ggscoord=%s%s%s" % (API_HOST, lat,"|", lon)
