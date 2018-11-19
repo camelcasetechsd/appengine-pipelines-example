@@ -17,9 +17,6 @@ class PipelineTrainigHandler(webapp2.RequestHandler):
         stage = TwiceSquaredPipeline(number)
         stage.start()
 
-        #square_stage = SquarePipeline(number)
-        #square_stage.start()
-
         template_path = os.path.join(os.path.dirname(__file__), 'pipeline_traning.html')
         self.response.write(template.render(template_path, {
             'number': number,

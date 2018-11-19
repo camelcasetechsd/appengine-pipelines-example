@@ -46,7 +46,7 @@ class HttpTrainingHandler(webapp2.RequestHandler):
                     'error' : 'No pages found'
                 }
         except requests.exceptions.RequestException as e:
-            logging.info(e)
+            logging.error(e)
             template_vars = {
                 'error' : e
             }
