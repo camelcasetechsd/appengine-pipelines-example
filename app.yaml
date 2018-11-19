@@ -20,6 +20,4 @@ handlers:
 includes:
   - ./env.yaml
 
-libraries: 
-  - name: ssl
-    version: 2.7
+
