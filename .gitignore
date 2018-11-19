@@ -12,3 +12,6 @@ libs/*
 
 # Byte-compiled / optimized / Python files
 *.pyc
+
+# vscode folder
+.vscode

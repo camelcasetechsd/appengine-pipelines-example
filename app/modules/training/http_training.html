@@ -1,0 +1,13 @@
+<html>
+  <body>
+    <h1>HTTP Training</h1>
+    {% if title %}
+    
+    <p>Title: {{ title }}</p>
+    <p>Extract : {{ extract }}</p>
+    
+    {% else %}
+    <p>{{ error }}</p>
+    {% endif %}
+  </body>
+</html>
