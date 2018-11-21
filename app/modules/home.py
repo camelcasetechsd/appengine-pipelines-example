@@ -15,8 +15,8 @@ class HomeHandler(webapp2.RequestHandler):
         
 
         if not g.latlng:
-            lat = -84.339880
-            lng = 82.951710
+            lat = 30.0355
+            lng = 31.223
         else:
             lat = g.latlng[0]
             lng = g.latlng[1]
