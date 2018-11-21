@@ -52,3 +52,56 @@ https://cloud.google.com/appengine/docs/standard/python/ndb/
 For the output, simply create a `<dl>` element with a `<dt>`  containing each
 entity *key* and a `<dd>` containing each entity *value*:
 https://www.w3schools.com/tags/tag_dl.asp
+
+
+## Full Pipeline "CityInfo" Task
+
+After the training tasks are complete, please work on this task to create a
+fully working set of pipelines to achieve a non-trivial aim.
+
+The aim of the task is to process weather information and Wikipedia extract 
+for a set of locations defined in a YAML config file. Once this information has 
+been retrieved from the relevant APIs, it should be persisted to the Datastore.
+The Datastore shall contained the latest version of this information. A webpage 
+shall be created to display this data to the end user.
+
+### Modules
+* `cityinfo` - A new Python module to contain all functionality related to this task.
+
+### Endpoints
+* `GET /cityinfo/build` - This endpoint shall trigger the pipelines to build 
+the information from the APIs.
+* `GET /cityinfo/view` - This endpoint shall display the latest information 
+retrieved from the Datastore. This should take the form of a listing, showing all 
+...
+
+### Entities (Kinds)
+* `CityInfo` - Fields: `Location` (City name), `Info` (Extract from Wikipedia), 
+`Temp` (Temperature from Weather API), `LastUpdated` (Time of last build to 
+update this info). Use `Location` (City name) also as the `key` of the entity 
+(to make it easy to update existing entities rather than creating new entities 
+when a Location already exists in `CityInfo`).
+
+### Config
+* `cityinfo.yaml` - This shall list the cities and their lat/lon coordinates 
+(take the content from `yaml_example.yaml` and use it for this).
+
+### Pipelines
+* `CityInfoRootPipeline` - Fetch the locations from YAML config and loop through 
+them, `yield`ing a `CityInfoFetchPipeline` for each location. At the end of 
+this pipeline, `yield` `CityInfoPersistPipeline` to save the data.
+* `CityInfoFetchPipeline` - A pipeline to control fetching all the data needed 
+for a location. `yield` `CityInfoInfoPipeline` & `CityInfoWeatherPipeline` for 
+this location.
+* `CityInfoInfoPipeline` - Retrieve information on this location from the 
+Wikipedia API.
+* `CityInfoWeatherPipeline` - Retrieve information on this location from a 
+weather API.
+* `CityInfoPersistPipeline` - Save all the fields to the `CityInfo` Datastore 
+entities for each location. If a `CityInfo` entity already exists for the 
+Location then update the existing entity rather than creating a new one.
+
+### Scheduled Tasks (Crons)
+* `GET /cityinfo/build` - Hourly
+Note: Check this documentation to declare cron jobs in AppEngine:
+https://cloud.google.com/appengine/docs/standard/python/config/cron
