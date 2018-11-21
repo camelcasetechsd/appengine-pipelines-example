@@ -72,8 +72,8 @@ shall be created to display this data to the end user.
 * `GET /cityinfo/build` - This endpoint shall trigger the pipelines to build 
 the information from the APIs.
 * `GET /cityinfo/view` - This endpoint shall display the latest information 
-retrieved from the Datastore. This should take the form of a listing, showing all 
-...
+retrieved from the Datastore. This should take the form of a listing, showing each 
+of the locations, with each of their field values displayed.
 
 ### Entities (Kinds)
 * `CityInfo` - Fields: `Location` (City name), `Info` (Extract from Wikipedia), 
