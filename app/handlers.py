@@ -19,7 +19,6 @@ def handlers():
         (r'/examples/datastore/([^\/]+)/([^\/]+)', DatastoreExampleHandler),
         (r'/examples/yaml', YamlExampleHandler),
         (r'/training/pipeline/(\d+)', PipelineTrainigHandler),
-        (r'/training/http/([\d\.]+)/([\d\.]+)', HttpTrainingHandler),
-        (r'/training/http/([\d\.]+)/([\d\.]+)', HttpTrainingHandler),
+        (r'/training/http/([-?\d\.]+)/([-?\d\.]+)', HttpTrainingHandler),
         (r'/training/datastore', DatastoreTrainingHandler),
     ]
