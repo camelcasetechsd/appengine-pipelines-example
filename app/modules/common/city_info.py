@@ -58,4 +58,3 @@ class CityInfoReturn(pipeline.Pipeline):
         logging.info("CityInfoReturn")
         
         return {'Location' : cityname ,'Info' : cityInfo , 'Temp' : cityTemp }
-        

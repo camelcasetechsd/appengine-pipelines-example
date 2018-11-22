@@ -1,0 +1,4 @@
+cron:
+- description: "City info build hourly"
+  url: /cityinfo/build
+  schedule: every 1 hours

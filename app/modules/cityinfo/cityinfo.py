@@ -23,5 +23,3 @@ class CityInfoViewHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_path, {
             'cities': cities,
         }))
-
-

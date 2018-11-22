@@ -11,3 +11,4 @@ class CityInfo(ndb.Model):
     Info = ndb.TextProperty()
     Temp = ndb.FloatProperty()
     LastUpdated = ndb.DateTimeProperty(auto_now=True)
+    

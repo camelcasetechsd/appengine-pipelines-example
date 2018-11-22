@@ -74,4 +74,3 @@ def StoreCitiesInto(cities):
                 entity.Info = city['Info']
                 entity.Temp = city['Temp']
                 entity.put()
-
