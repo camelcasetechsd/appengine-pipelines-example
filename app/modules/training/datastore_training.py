@@ -1,7 +1,7 @@
 import webapp2
 import logging
 import os
-from google.appengine.ext import ndb
+
 from google.appengine.ext.webapp import template
 from app.modules.common.kinds import Example
 
@@ -9,8 +9,10 @@ class DatastoreTrainingHandler(webapp2.RequestHandler):
     def get(self):
         logging.info("DatastoreTrainingHandler")
         
+        LIST_DEFAULT_LIMIT = 20
+        
         # get entities
-        entities_for_example_kind = Example.query().fetch(20)
+        entities_for_example_kind = Example.query().fetch(LIST_DEFAULT_LIMIT)
 
         # make a list of key value pairs
         entities = []
