@@ -9,4 +9,5 @@ class Example(ndb.Model):
 class CityInfo(ndb.Model):
     Location = ndb.StringProperty()
     Info = ndb.TextProperty()
-    LastUpdated = ndb.DateTimeProperty(auto_now_add=True)
+    Temp = ndb.FloatProperty()
+    LastUpdated = ndb.DateTimeProperty(auto_now=True)

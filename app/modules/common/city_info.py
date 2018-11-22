@@ -6,6 +6,8 @@ import yaml
 from pipeline import common
 import requests
 from requests_toolbelt.adapters import appengine
+from app.modules.common.kinds import CityInfo
+from google.appengine.ext import ndb
 
 # https://toolbelt.readthedocs.io/en/latest/adapters.html#appengineadapter
 appengine.monkeypatch(validate_certificate=False)
@@ -108,6 +110,25 @@ class CityInfoPersistPipeline(pipeline.Pipeline):
     def run(self, *args):
         logging.info("CityInfoPersistPipeline")
         logging.info(args)
+
+        for city in args:
+            logging.info(city)
+            entity_key = ndb.Key('CityInfo', city['Location'])
+            entity = entity_key.get()
+
+            if entity is None:
+                entity = CityInfo(
+                    Location=city['Location'],
+                    Info=city['Info'],
+                    Temp=city['Temp']
+                )
+                entity.key = ndb.Key('CityInfo', city['Location'])
+                entity.put()
+
+            else:
+                entity.Info = city['Info']
+                entity.Temp = city['Temp']
+                entity.put()
 
 class TestReturn(pipeline.Pipeline):
 
