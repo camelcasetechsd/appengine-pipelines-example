@@ -3,6 +3,7 @@ import logging
 import os
 from google.appengine.ext import ndb
 from requests_toolbelt.adapters import appengine
+from app.modules.common.kinds import CityInfo
 
 # https://toolbelt.readthedocs.io/en/latest/adapters.html#appengineadapter
 appengine.monkeypatch(validate_certificate=False)
@@ -35,10 +36,10 @@ def CityWikiInfo(lat , lon):
         else:
             # if there is no data returned show user
             logging.error(e)
-            return None
     except requests.exceptions.RequestException as e:
         logging.error(e)
-        return None
+        
+    return None
 
 def CityWeatherTemp(lat , lon):
     API_HOST = "http://api.openweathermap.org"
@@ -57,7 +58,6 @@ def CityWeatherTemp(lat , lon):
 
 def StoreCitiesInto(cities):
     for city in cities:
-            logging.info(city)
             entity_key = ndb.Key('CityInfo', city['Location'])
             entity = entity_key.get()
 

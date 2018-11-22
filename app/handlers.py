@@ -6,7 +6,8 @@ from app.modules.examples.yaml_example import YamlExampleHandler
 from app.modules.training.pipeline_training import PipelineTrainigHandler
 from app.modules.training.http_training import HttpTrainingHandler
 from app.modules.training.datastore_training import DatastoreTrainingHandler
-from app.modules.cityinfo.cityinfo_build import CityInfoBuildHandler
+from app.modules.cityinfo.cityinfo import CityInfoBuildHandler
+from app.modules.cityinfo.cityinfo import CityInfoViewHandler
 
 def handlers():
     return [
@@ -23,4 +24,5 @@ def handlers():
         (r'/training/http/([-?\d\.]+)/([-?\d\.]+)', HttpTrainingHandler),
         (r'/training/datastore', DatastoreTrainingHandler),
         (r'/cityinfo/build', CityInfoBuildHandler),
+        (r'/cityinfo/view', CityInfoViewHandler),
     ]

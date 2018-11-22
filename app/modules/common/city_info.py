@@ -3,8 +3,6 @@ import logging
 import pipeline
 import os
 import yaml
-from app.modules.common.kinds import CityInfo
-from google.appengine.ext import ndb
 import app.modules.cityinfo.city_extras as CityExtras
 
 class CityInfoRootPipeline(pipeline.Pipeline):
@@ -17,19 +15,11 @@ class CityInfoRootPipeline(pipeline.Pipeline):
         with open(yaml_path, 'r') as stream:
             data = yaml.load(stream)
 
-        logging.info(data)
-
         cities = []
 
         for city in data['cities'] :
             cityInfo = yield CityInfoFetchPipeline(city)
-            #yield common.Log.info('SplitCount result = %s', cityData)
-
             cities.append(cityInfo)
-            # yield common.List(cities)
-            
-            
-        #logging.info(*cities)
         
         yield CityInfoPersistPipeline(*cities)
         
@@ -42,8 +32,6 @@ class CityInfoFetchPipeline(pipeline.Pipeline):
         citytemp = yield CityInfoWeatherPipeline(city['lat'] , city['lon'])
 
         yield CityInfoReturn(city['name'], cityinfo,citytemp)
-        
-
 
 class CityInfoInfoPipeline(pipeline.Pipeline):
 
@@ -61,8 +49,7 @@ class CityInfoPersistPipeline(pipeline.Pipeline):
     
     def run(self, *args):
         logging.info("CityInfoPersistPipeline")
-        # logging.info(args)
-
+        
         CityExtras.StoreCitiesInto(args)
 
 class CityInfoReturn(pipeline.Pipeline):
