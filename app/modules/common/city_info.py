@@ -3,14 +3,9 @@ import logging
 import pipeline
 import os
 import yaml
-from pipeline import common
-import requests
-from requests_toolbelt.adapters import appengine
 from app.modules.common.kinds import CityInfo
 from google.appengine.ext import ndb
-
-# https://toolbelt.readthedocs.io/en/latest/adapters.html#appengineadapter
-appengine.monkeypatch(validate_certificate=False)
+import app.modules.cityinfo.city_extras as CityExtras
 
 class CityInfoRootPipeline(pipeline.Pipeline):
 
@@ -46,7 +41,7 @@ class CityInfoFetchPipeline(pipeline.Pipeline):
         cityinfo = yield CityInfoInfoPipeline(city['lat'] , city['lon'] )
         citytemp = yield CityInfoWeatherPipeline(city['lat'] , city['lon'])
 
-        yield TestReturn(city['name'], cityinfo,citytemp)
+        yield CityInfoReturn(city['name'], cityinfo,citytemp)
         
 
 
@@ -54,86 +49,26 @@ class CityInfoInfoPipeline(pipeline.Pipeline):
 
     def run(self, lat , lon):
         logging.info("CityInfoInfoPipeline")
-
-        # wikipedia base api url
-        API_HOST = "http://en.wikipedia.org/w/api.php?"
-
-            
-        # add given lat long to api url
-        apiUrl = "%sformat=json&action=query&prop=extracts&exintro=1&explaintext=1&exlimit=20&generator=geosearch&ggsradius=10000&ggslimit=100&ggscoord=%s%s%s" % (API_HOST, lat,"|", lon)
-
-        logging.info(apiUrl)
-
-        template_vars = {}
-
-        try:
-            # make the api call
-            request = requests.get(apiUrl)
-            data = request.json()
-
-            # check if there is data returned
-            if 'query' in data :
-                
-                for idx , page in data['query']['pages'].items():
-                    # get the 0 indexd page (first page data)
-                    if page['index'] == 0:
-                        # return page['extract']
-                        return "good place"
-              
-            else:
-                # if there is no data returned show user
-                logging.error(e)
-                return None
-        except requests.exceptions.RequestException as e:
-            logging.error(e)
-            return None
+        return CityExtras.CityWikiInfo(lat , lon)
 
 class CityInfoWeatherPipeline(pipeline.Pipeline):
 
     def run(self , lat , lon):
         logging.info("CityInfoWeatherPipeline")
-        
-        API_HOST = "http://api.openweathermap.org"
-        API_KEY = os.environ.get("HTTP_EXAMPLE_API_KEY")
-
-        if API_KEY:
-            apiUrl = "%s/data/2.5/forecast?appid=%s&mode=json&units=metric&lat=%s&lon=%s" % (API_HOST, API_KEY, lat, lon)
-            request = requests.get(apiUrl)
-            data = request.json()
-            return data['list'][0]['main']['temp']
-        else:
-            return None
-
+        return CityExtras.CityWeatherTemp(lat , lon)
 
 class CityInfoPersistPipeline(pipeline.Pipeline):
     
     def run(self, *args):
         logging.info("CityInfoPersistPipeline")
-        logging.info(args)
+        # logging.info(args)
 
-        for city in args:
-            logging.info(city)
-            entity_key = ndb.Key('CityInfo', city['Location'])
-            entity = entity_key.get()
+        CityExtras.StoreCitiesInto(args)
 
-            if entity is None:
-                entity = CityInfo(
-                    Location=city['Location'],
-                    Info=city['Info'],
-                    Temp=city['Temp']
-                )
-                entity.key = ndb.Key('CityInfo', city['Location'])
-                entity.put()
-
-            else:
-                entity.Info = city['Info']
-                entity.Temp = city['Temp']
-                entity.put()
-
-class TestReturn(pipeline.Pipeline):
+class CityInfoReturn(pipeline.Pipeline):
 
     def run(self, cityname,cityInfo , cityTemp):
-        logging.info("TestReturn")
+        logging.info("CityInfoReturn")
         
         return {'Location' : cityname ,'Info' : cityInfo , 'Temp' : cityTemp }
         
