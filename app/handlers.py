@@ -6,8 +6,7 @@ from app.modules.examples.yaml_example import YamlExampleHandler
 from app.modules.training.pipeline_training import PipelineTrainigHandler
 from app.modules.training.http_training import HttpTrainingHandler
 from app.modules.training.datastore_training import DatastoreTrainingHandler
-from app.modules.cityinfo.cityinfo import CityInfoBuildHandler
-from app.modules.cityinfo.cityinfo import CityInfoViewHandler
+from app.modules.cityinfo.cityinfo import CityInfoBuildHandler , CityInfoViewHandler
 
 def handlers():
     return [
