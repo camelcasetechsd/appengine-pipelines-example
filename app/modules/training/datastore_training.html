@@ -2,11 +2,10 @@
   <body>
     <h1>Datastore Training</h1>
     <dl>
-      
-        {% for entity in entities %}
-          <dt><p>{{ entity.key }}</p></dt>
-          <dd><p>{{ entity.value }}</p></dd>
-        {% endfor %}
+      {% for entity in entities %}
+        <dt><p>{{ entity.key }}</p></dt>
+        <dd><p>{{ entity.value }}</p></dd>
+      {% endfor %}
       {% if not entities %}
         No entities found
       {% endif %}

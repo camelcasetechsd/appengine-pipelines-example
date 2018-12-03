@@ -1,4 +1,3 @@
-import logging
 from google.appengine.ext import ndb
 
 class Example(ndb.Model):

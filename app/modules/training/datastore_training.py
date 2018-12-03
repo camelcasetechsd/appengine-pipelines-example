@@ -1,7 +1,6 @@
 import webapp2
 import logging
 import os
-
 from google.appengine.ext.webapp import template
 from app.modules.common.kinds import Example
 
