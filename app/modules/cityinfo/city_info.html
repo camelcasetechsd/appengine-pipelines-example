@@ -1,0 +1,13 @@
+<html>
+  <body>
+    <h1>Cities Information</h1>
+    <dl>
+        {% for city in cities %}
+            <dt><p>{{ city.Location }}</p></dt>
+            <dd><p>Temp : {{ city.Temp }}</p></dd>
+            <dd><p>Last Updated : {{ city.LastUpdated }}</p></dd>
+            <dd><p>Info : {{ city.Info }}</p></dd>
+        {% endfor %}
+    </dl>
+  </body>
+</html>

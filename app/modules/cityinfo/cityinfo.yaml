@@ -1,0 +1,13 @@
+cities:
+  -
+    name: London
+    lat: 51.507222
+    lon: -0.1275
+  -
+    name: Cairo
+    lat: 30.044444
+    lon: 31.235833
+  -
+    name: Beijing
+    lat: 39.916667
+    lon: 116.383333

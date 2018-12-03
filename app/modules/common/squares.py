@@ -34,3 +34,4 @@ class LogResult(pipeline.Pipeline):
 
     def run(self, number):
         logging.info('All done! Value is %s', number)
+
