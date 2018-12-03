@@ -18,7 +18,6 @@ class CityInfoViewHandler(webapp2.RequestHandler):
         # get cities
         cities = CityInfo.query().fetch(20)
 
-        logging.info(cities)
         template_path = os.path.join(os.path.dirname(__file__), 'city_info.html')
         self.response.write(template.render(template_path, {
             'cities': cities,

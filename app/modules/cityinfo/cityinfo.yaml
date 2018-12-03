@@ -11,3 +11,8 @@ cities:
     name: Beijing
     lat: 39.916667
     lon: 116.383333
+
+  -
+    name: Paris
+    lat: 48.8588376
+    lon: 2.2768489

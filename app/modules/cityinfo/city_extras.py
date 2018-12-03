@@ -55,21 +55,21 @@ def CityWeatherTemp(lat , lon):
             
     return None
 
-def StoreCitiesInto(cities):
+def StoreCitiesInfo(cities):
     for city in cities:
-            entity_key = ndb.Key('CityInfo', city['Location'])
-            entity = entity_key.get()
+        entity_key = ndb.Key('CityInfo', city['Location'])
+        entity = entity_key.get()
 
-            if entity is None:
-                entity = CityInfo(
-                    Location=city['Location'],
-                    Info=city['Info'],
-                    Temp=city['Temp']
-                )
-                entity.key = ndb.Key('CityInfo', city['Location'])
-                entity.put()
+        if entity is None:
+            entity = CityInfo(
+                Location=city['Location'],
+                Info=city['Info'],
+                Temp=city['Temp']
+            )
+            entity.key = ndb.Key('CityInfo', city['Location'])
+            entity.put()
 
-            else:
-                entity.Info = city['Info']
-                entity.Temp = city['Temp']
-                entity.put()
+        else:
+            entity.Info = city['Info']
+            entity.Temp = city['Temp']
+            entity.put()

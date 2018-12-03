@@ -8,6 +8,9 @@
             <dd><p>Last Updated : {{ city.LastUpdated }}</p></dd>
             <dd><p>Info : {{ city.Info }}</p></dd>
         {% endfor %}
+        {% if not cities %}
+          No cities found
+        {% endif %}
     </dl>
   </body>
 </html>

@@ -1,9 +1,8 @@
 import webapp2
 import logging
 import pipeline
-import os
-import yaml
 import app.modules.cityinfo.city_extras as CityExtras
+import app.modules.common.util as Utils
 
 class CityInfoRootPipeline(pipeline.Pipeline):
 
@@ -11,10 +10,7 @@ class CityInfoRootPipeline(pipeline.Pipeline):
         logging.info("CityInfoRootPipeline")
 
         # Read cityinfo.yaml file
-        yaml_path = os.path.join(os.path.dirname(__file__), '../cityinfo/cityinfo.yaml')
-        with open(yaml_path, 'r') as stream:
-            data = yaml.load(stream)
-
+        data = Utils.ReadYamlFile('../cityinfo/cityinfo.yaml')
         cities = []
 
         for city in data['cities'] :
@@ -50,7 +46,7 @@ class CityInfoPersistPipeline(pipeline.Pipeline):
     def run(self, *args):
         logging.info("CityInfoPersistPipeline")
         
-        CityExtras.StoreCitiesInto(args)
+        CityExtras.StoreCitiesInfo(args)
 
 class CityInfoReturn(pipeline.Pipeline):
 
